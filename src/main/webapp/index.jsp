@@ -4,6 +4,6 @@
     <title>Index</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <jsp:forward page="/jsp/LoginPage.jsp"/>
     </body>
 </html>

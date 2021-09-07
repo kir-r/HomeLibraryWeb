@@ -1,12 +1,12 @@
 body {
-    background-color:rgb(196, 236, 120);
+    background-color:rgb(250, 255, 153);
 }
-.mainIcon {
-    width: 70%;
-    padding-left: 50%;
+.logo {
+    width: 100%;
+    padding-left: 10%;
 }
 .container-xxl {
-    margin-top: 10%;
+    margin-top: 20%;
 }
 p {
     color: blue;
