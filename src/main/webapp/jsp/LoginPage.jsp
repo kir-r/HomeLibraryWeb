@@ -28,6 +28,7 @@
 														<div class="col-sm-6">
 															<input type="password" name="password" id="inputPassword">
 															</div>
+
 														</div>
 														<button type="submit" class="btn btn-primary">Login</button>
 													</form>

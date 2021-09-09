@@ -22,6 +22,7 @@ public class AuthorizationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("from doPost before login");
         String result = login(request, response);
         try {
             request.getRequestDispatcher(result).forward(request, response);
@@ -43,6 +44,7 @@ public class AuthorizationServlet extends HttpServlet {
     }
 
     private String login(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("hello from login method");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         User user = userDAO.authenticate(login, password);
