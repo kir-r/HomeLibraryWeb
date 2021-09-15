@@ -18,7 +18,7 @@ import java.io.IOException;
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(AuthorizationServlet.class);
-    private UserDAO userDAO = new UserDataBaseDAO();
+    private final UserDAO userDAO = new UserDataBaseDAO();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,6 +51,9 @@ public class AuthorizationServlet extends HttpServlet {
 
         if (user != null) {
             request.getSession().setAttribute("login", user.getLogin());
+            //Когда вы используете request.getSession().setAttribute() , вы сохраняете что-то для этого
+            // конкретного сеанса пользователя . Вы можете использовать этот атрибут в любое время,
+            // если срок действия сеанса пользователя еще не истек .
             return "jsp/MainMenu.jsp";
         }
         else {
