@@ -15,22 +15,22 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class LibraryWorkServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(LibraryWorkServlet.class);
-    private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        service(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        service(req, resp);
     }
 
-    protected void service(HttpServletRequest request, HttpServletResponse response) {
-        String command = request.getParameter("command");
-        String parameterFromUser = request.getParameter("name"); //author?
-        String result = libraryDAO.command + "(" + parameterFromUser + ")";
-
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ActionResolver actionResolver = new ActionResolver();
+        String result = actionResolver.execute(request);
+        request.getRequestDispatcher(result).forward(request, response);
     }
 }
+
+

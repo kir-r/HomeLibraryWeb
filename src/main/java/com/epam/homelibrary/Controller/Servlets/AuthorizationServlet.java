@@ -4,6 +4,7 @@ import com.epam.homelibrary.DAO.UserDAO;
 import com.epam.homelibrary.DAO.impl.UserDataBaseDAO;
 import com.epam.homelibrary.DAO.impl.UserJsonDAO;
 import com.epam.homelibrary.Main;
+import com.epam.homelibrary.models.Admin;
 import com.epam.homelibrary.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,6 +20,11 @@ import java.io.IOException;
 public class AuthorizationServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(AuthorizationServlet.class);
     private final UserDAO userDAO = new UserDataBaseDAO();
+    private static User user;
+
+    public static User getUser() {
+        return user;
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,6 +57,13 @@ public class AuthorizationServlet extends HttpServlet {
 
         if (user != null) {
             request.getSession().setAttribute("login", user.getLogin());
+
+            if (user.isAdmin()) {
+                request.getSession().setAttribute("role", "ADMIN");
+            } else {
+                request.getSession().setAttribute("role", "USER");
+            }
+
             //Когда вы используете request.getSession().setAttribute() , вы сохраняете что-то для этого
             // конкретного сеанса пользователя . Вы можете использовать этот атрибут в любое время,
             // если срок действия сеанса пользователя еще не истек .
