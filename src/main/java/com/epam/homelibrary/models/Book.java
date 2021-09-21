@@ -57,9 +57,9 @@ public class Book {
     @Override
     public String toString() {
         return "\"" + name + "\"\n" +
-                "by " + author + "\n" +
-                "year " + year + "\n"+
-                "ISBN - " + ISBN +"\n"+
-                "pages - " + pages +"\n";
+                "by " + author + ",\n" +
+                "year - " + year + ",\n" +
+                "ISBN - " + ISBN + ",\n" +
+                "pages - " + pages + "\n";
     }
 }

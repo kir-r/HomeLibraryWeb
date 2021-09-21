@@ -22,6 +22,7 @@ public class ActionResolver {
         List<Book> listOfBooksFromDB;
         User user;
         String command = request.getParameter("command");
+        System.out.println("command: " + command);
 
         switch (command) {
             case ("addBook"):
@@ -32,15 +33,18 @@ public class ActionResolver {
                 pages = Integer.parseInt(request.getParameter("pages"));
                 Book book = new Book(nameOfBook, author, year, ISBN, pages);
                 libraryDAO.addBook(book);
-                String completeAction = book.getName() + " added";
+                String completeAction = book.getName();
+                request.setAttribute("addedBook", completeAction);
                 break;
             case ("removeBook"):
                 nameOfBook = request.getParameter("name");
                 libraryDAO.removeBook(nameOfBook);
+                request.setAttribute("removedBook", nameOfBook);
                 break;
             case ("removeBookByAuthor"):
                 author = request.getParameter("author");
                 libraryDAO.removeBookByAuthor(author);
+                request.setAttribute("removedBook", "by " + author);
                 break;
             case ("addBookmark"):
                 nameOfBook = request.getParameter("name");
@@ -50,12 +54,16 @@ public class ActionResolver {
                 bookmark.setPage(pages);
                 bookmark.setBook(listOfBooksFromDB.get(0));
                 libraryDAO.addBookmark(bookmark);
+                request.setAttribute("addedBookmark", bookmark);
                 break;
             case ("removeBookmark"):
                 nameOfBook = request.getParameter("name");
                 listOfBooksFromDB = libraryDAO.searchBookByName(nameOfBook);
                 if (!listOfBooksFromDB.isEmpty()) {
                     libraryDAO.removeBookmark(listOfBooksFromDB.get(0));
+                    request.setAttribute("removedBookmark", nameOfBook);
+                } else {
+                    request.setAttribute("removedBookmark", "нет такой");
                 }
                 break;
             case ("searchBookByName"):
@@ -63,8 +71,10 @@ public class ActionResolver {
                 listOfBooksFromDB = libraryDAO.searchBookByName(nameOfBook);
                 if (!listOfBooksFromDB.isEmpty()) {
                     for (Book bookFromList : listOfBooksFromDB) {
-                        System.out.println(bookFromList); //Куда вывести?
+                        request.setAttribute("bookFromList", bookFromList);
                     }
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
                 }
                 break;
             case ("searchBookByAuthor"):
@@ -72,17 +82,21 @@ public class ActionResolver {
                 listOfBooksFromDB = libraryDAO.searchBookByAuthor(author);
                 if (!listOfBooksFromDB.isEmpty()) {
                     for (Book bookFromList : listOfBooksFromDB) {
-                        System.out.println(bookFromList); //Куда вывести?
+                        request.setAttribute("bookFromList", bookFromList);
                     }
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
                 }
                 break;
             case ("searchBookByISBN"):
-               ISBN = Long.parseLong(request.getParameter("ISBN"));
-               listOfBooksFromDB = libraryDAO.searchBookByISBN(ISBN);
+                ISBN = Long.parseLong(request.getParameter("ISBN"));
+                listOfBooksFromDB = libraryDAO.searchBookByISBN(ISBN);
                 if (!listOfBooksFromDB.isEmpty()) {
                     for (Book bookFromList : listOfBooksFromDB) {
-                        System.out.println(bookFromList); //Куда вывести?
+                        request.setAttribute("bookFromList", bookFromList);
                     }
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
                 }
                 break;
             case ("searchBookInRangeOfYears"):
@@ -92,8 +106,10 @@ public class ActionResolver {
                     listOfBooksFromDB = libraryDAO.searchBookInRangeOfYears(yearFrom, yearTo);
                     if (!listOfBooksFromDB.isEmpty()) {
                         for (Book bookFromList : listOfBooksFromDB) {
-                            System.out.println(bookFromList);  //Куда вывести?
+                            request.setAttribute("bookFromList", bookFromList);
                         }
+                    } else {
+                        request.setAttribute("bookFromList", "нет такой");
                     }
                 }
                 break;
@@ -104,9 +120,10 @@ public class ActionResolver {
                 listOfBooksFromDB = libraryDAO.searchBookByYearPagesName(nameOfBook, year, pages);
                 if (!listOfBooksFromDB.isEmpty()) {
                     for (Book bookFromList : listOfBooksFromDB) {
-
-                        System.out.println(bookFromList);  //Куда вывести?
+                        request.setAttribute("bookFromList", bookFromList);
                     }
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
                 }
                 break;
             case ("searchBookWithBookmarks"):
@@ -114,7 +131,7 @@ public class ActionResolver {
                 List<Book> listOfBookWithBookmarks = libraryDAO.searchBookWithBookmarks(AuthorizationServlet.getUser()); //user authenticate?
                 break;
             case ("getListOfBooksFromDB"):
-
+                System.out.println(libraryDAO.getListOfBooksFromDB());
                 break;
             case ("getListOfBookMarksFromDB"):
 

@@ -34,6 +34,14 @@
     </div>
 </nav>
 
+<div id="sidebar">
+    <p>Найденная книга: ${bookFromList}</p>
+    <p>Добавленная книга: ${addedBook}</p>
+    <p>Удаленная книга: ${removedBook}</p>
+    <p>Добавленная закладка: ${addedBookmark}</p>
+    <p>Удалена закладка из книги: ${removedBookmark}</p>
+</div>
+
 <div class="row">
     <div class="col-3">
         <ul class="flex-container nav nav-pills nav-stacked bg-light">
@@ -42,16 +50,14 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item addBook" href="add" onclick="return false">Добавить книгу</a></li>
-                <li><a class="dropdown-item addAuthor" href="#" onclick="return false">Добавить автора</a></li>
                 <li><a class="dropdown-item deleteBook" href="#" onclick="return false">Удалить книгу</a></li>
-                <li><a class="dropdown-item deleteAuthor" href="#" onclick="return false">Удалить автора</a></li>
             </ul>
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 Опции поиска
             </button>
             <ul class="dropdown-menu">
             <li><a class="dropdown-item searchByYears" href="#" onclick="return false">По диапазону годов</a></li>
-            <li><a class="dropdown-item searchByYearPagesname" href="#" onclick="return false">По году, количеству
+            <li><a class="dropdown-item searchByYearPagesName" href="#" onclick="return false">По году, количеству
                 страниц и названию</a></li>
         </ul>
         <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -90,104 +96,104 @@
                 <input type="text" class="form-control" name="author" id="authorName">
             </div>
             <div class="mb-3">
-                <label for="year" class="col-form-label">ISBN:</label>
+                <label for="year" class="col-form-label">Год:</label>
                 <input type="text" class="form-control" name="year" id="year">
             </div>
             <div class="mb-3">
-                <label for="ISBNumber" class="col-form-label">Год:</label>
-                <input type="text" class="form-control" name="ISBNumber" id="ISBNumber">
+                <label for="ISBN" class="col-form-label">ISBN:</label>
+                <input type="text" class="form-control" name="ISBN" id="ISBNumber">
             </div>
             <div class="mb-3">
                 <label for="pages" class="col-form-label">Кол-во страниц:</label>
                 <input type="text" class="form-control" name="pages" id="pagesToAddBook">
             </div>
-            <button id="addBookButton" type="submit" class="btn btn-outline-success" disabled="disabled">Отправить
+            <button id="addBookButton" type="submit" class="btn btn-outline-success">Добавить
             </button>
         </form>
 
         <form id="removeBook" action="controller" method="POST">
             <input type="hidden" name="command" value="removeBook">
             <div class="mb-3">
-                <label for="name" class="col-form-label">Название книги:</label>
+                <label for="name" class="col-form-label">Удалить книгу по названию:</label>
                 <input type="text" class="form-control" name="name" id="nameToRemoveBook">
             </div>
-            <button id="removeBookButton" type="submit" class="btn btn-outline-success" disabled="disabled">Отправить
+            <button id="removeBookButton" type="submit" class="btn btn-outline-success">Удалить
             </button>
         </form>
 
         <form id="removeBookByAuthor" action="controller" method="POST">
             <input type="hidden" name="command" value="removeBookByAuthor">
             <div class="mb-3">
-                <label for="name" class="col-form-label">Автор книги:</label>
+                <label for="name" class="col-form-label">Удалить книгу автора:</label>
                 <input type="text" class="form-control" name="author" id="authorOfRemovedBOok">
             </div>
-            <button id="removeBookByAuthorButton" type="submit" class="btn btn-outline-success" disabled="disabled">
-                Отправить
+            <button id="removeBookByAuthorButton" type="submit" class="btn btn-outline-success" >
+                Удалить
             </button>
         </form>
 
         <form id="addBookmark" id="addBookmark" action="controller" method="POST">
             <input type="hidden" name="command" value="addBookmark">
             <div class="mb-3">
-                <label for="name" class="col-form-label">Название книги:</label>
+                <label for="name" class="col-form-label">Добавить закладку в книгу:</label>
                 <input type="text" class="form-control" name="name" id="nameOfBookToAddBookmark">
             </div>
             <div class="mb-3">
                 <label for="pages" class="col-form-label">Номер страницы:</label>
                 <input type="text" class="form-control" name="pages" id="pages">
             </div>
-            <button id="addBookmarkButton" type="submit" class="btn btn-outline-success" disabled="disabled">Отправить
+            <button id="addBookmarkButton" type="submit" class="btn btn-outline-success" >Добавить
             </button>
         </form>
 
         <form id="removeBookmark" action="controller" method="POST">
             <input type="hidden" name="command" value="removeBookmark">
             <div class="mb-3">
-                <label for="name" class="col-form-label">Название книги:</label>
+                <label for="name" class="col-form-label">Удалить закладку из книги:</label>
                 <input type="text" class="form-control" name="name" id="nameOfBookToRemoveBookmark">
             </div>
-            <button id="removeBookmarkButton" type="submit" class="btn btn-outline-success" disabled="disabled">
-                Отправить
+            <button id="removeBookmarkButton" type="submit" class="btn btn-outline-success" >
+                Удалить
             </button>
         </form>
 
         <form id="searchBookByName" action="controller">
             <input type="hidden" name="command" value="searchBookByName">
             <div class="mb-3">
-                <label for="name" class="col-form-label">Название книги:</label>
+                <label for="name" class="col-form-label">Искать книгу:</label>
                 <input type="text" class="form-control" name="name" id="name">
             </div>
-            <button id="searchBookByNameButton" type="submit" class="btn btn-outline-success" disabled="disabled">
-                Отправить
+            <button id="searchBookByNameButton" type="submit" class="btn btn-outline-success" >
+                Найти
             </button>
         </form>
 
         <form id="searchBookByAuthor" action="controller">
             <input type="hidden" name="command" value="searchBookByAuthor">
             <div class="mb-3">
-                <label for="author" class="col-form-label">Имя автора:</label>
+                <label for="author" class="col-form-label">Искать книгу автора:</label>
                 <input type="text" class="form-control" name="author" id="author">
             </div>
-            <button id="searchBookByAuthorButton" type="submit" class="btn btn-outline-success" disabled="disabled">
-                Отправить
+            <button id="searchBookByAuthorButton" type="submit" class="btn btn-outline-success" >
+                Найти
             </button>
         </form>
 
         <form id="searchBookByISBN" action="controller">
             <input type="hidden" name="command" value="searchBookByISBN">
             <div class="mb-3">
-                <label for="ISBN" class="col-form-label">ISBN:</label>
+                <label for="ISBN" class="col-form-label">Искать по ISBN:</label>
                 <input type="text" class="form-control" name="ISBN" id="ISBN">
             </div>
-            <button id="searchBookByISBNButton" type="submit" class="btn btn-outline-success" disabled="disabled">
-                Отправить
+            <button id="searchBookByISBNButton" type="submit" class="btn btn-outline-success" >
+                Найти
             </button>
         </form>
 
         <form id="searchBookInRangeOfYears" action="controller">
             <input type="hidden" name="command" value="searchBookInRangeOfYears">
             <div class="mb-3">
-                <label for="yearFrom" class="form-label">С года:</label>
+                <label for="yearFrom" class="form-label">Искать книги с года:</label>
                 <input type="text" class="form-control" name="yearFrom" id="yearFrom">
             </div>
             <div class="mb-3">
@@ -195,7 +201,7 @@
                 <input type="text" class="form-control" name="yearTo" id="yearTo">
             </div>
             <button id="searchBookInRangeOfYearsButton" type="submit" class="btn btn-outline-success"
-                    disabled="disabled">Отправить
+                    >Найти в этом промежутке
             </button>
         </form>
 
@@ -214,7 +220,7 @@
                 <input type="text" class="form-control" name="pages" id="pagesToSearch">
             </div>
             <button id="searchBookByYearPagesNameButton" type="submit" class="btn btn-outline-success"
-                    disabled="disabled">Отправить
+                    >Найти по году, страницам и имени
             </button>
         </form>
 
