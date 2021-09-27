@@ -80,10 +80,12 @@ public class ActionResolver {
             case ("searchBookByAuthor"):
                 author = request.getParameter("author");
                 listOfBooksFromDB = libraryDAO.searchBookByAuthor(author);
+                StringBuilder stringBuilder1 = new StringBuilder();
                 if (!listOfBooksFromDB.isEmpty()) {
                     for (Book bookFromList : listOfBooksFromDB) {
-                        request.setAttribute("bookFromList", bookFromList);
+                        stringBuilder1.append(bookFromList).append(".\n");
                     }
+                    request.setAttribute("bookFromList", stringBuilder1.toString());
                 } else {
                     request.setAttribute("bookFromList", "нет такой");
                 }
@@ -102,12 +104,14 @@ public class ActionResolver {
             case ("searchBookInRangeOfYears"):
                 int yearFrom = Integer.parseInt(request.getParameter("yearFrom"));
                 int yearTo = Integer.parseInt(request.getParameter("yearTo"));
+                StringBuilder stringBuilder2 = new StringBuilder();
                 if (yearFrom <= yearTo) {
                     listOfBooksFromDB = libraryDAO.searchBookInRangeOfYears(yearFrom, yearTo);
                     if (!listOfBooksFromDB.isEmpty()) {
                         for (Book bookFromList : listOfBooksFromDB) {
-                            request.setAttribute("bookFromList", bookFromList);
+                            stringBuilder2.append(bookFromList).append(".\n");
                         }
+                        request.setAttribute("bookFromList", stringBuilder2.toString());
                     } else {
                         request.setAttribute("bookFromList", "нет такой");
                     }
@@ -127,17 +131,52 @@ public class ActionResolver {
                 }
                 break;
             case ("searchBookWithBookmarks"):
-//                String login = (String) request.getSession().getAttribute("login");
-                List<Book> listOfBookWithBookmarks = libraryDAO.searchBookWithBookmarks(AuthorizationServlet.getUser()); //user authenticate?
+                List<Book> listOfBookWithBookmarks = libraryDAO.searchBookWithBookmarks(AuthorizationServlet.getUser());
+                StringBuilder stringBuilder3 = new StringBuilder();
+                if (!listOfBookWithBookmarks.isEmpty()) {
+                    for (Book bookFromList : listOfBookWithBookmarks) {
+                        stringBuilder3.append(bookFromList).append(".\n");
+                    }
+                    request.setAttribute("bookFromList", stringBuilder3.toString());
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
+                }
                 break;
             case ("getListOfBooksFromDB"):
-                System.out.println(libraryDAO.getListOfBooksFromDB());
+                listOfBooksFromDB = libraryDAO.getListOfBooksFromDB();
+                StringBuilder stringBuilder4 = new StringBuilder();
+                if (!listOfBooksFromDB.isEmpty()) {
+                    for (Book bookFromList : listOfBooksFromDB) {
+                        stringBuilder4.append(bookFromList).append(".\n");
+                        request.setAttribute("bookFromList", stringBuilder4.toString());
+                    }
+                } else {
+                    request.setAttribute("bookFromList", "нет такой");
+                }
                 break;
-            case ("getListOfBookMarksFromDB"):
-
+            case ("getListOfBookmarksFromDB"):
+                List<Bookmark> listOfBookmarksFromDB = libraryDAO.getListOfBookMarksFromDB();
+                StringBuilder stringBuilder5 = new StringBuilder();
+                if (!listOfBookmarksFromDB.isEmpty()) {
+                    for (Bookmark bookmarkFromList : listOfBookmarksFromDB) {
+                        stringBuilder5.append(bookmarkFromList).append(".\n");
+                        request.setAttribute("bookmarkFromList", stringBuilder5.toString());
+                    }
+                } else {
+                    request.setAttribute("bookmarkFromList", "нет такой");
+                }
                 break;
             case ("getListOfUserFromDB"):
-
+                List<User> listOfUserFromDB = libraryDAO.getListOfUserFromDB();
+                StringBuilder stringBuilder6 = new StringBuilder();
+                if (!listOfUserFromDB.isEmpty()) {
+                    for (User userFromList : listOfUserFromDB) {
+                        stringBuilder6.append(userFromList).append(".\n");
+                        request.setAttribute("userFromList", stringBuilder6.toString());
+                    }
+                } else {
+                    request.setAttribute("userFromList", "нету никого");
+                }
                 break;
             case ("createUser"):
                 String login = request.getParameter("login");
@@ -150,12 +189,10 @@ public class ActionResolver {
                 user.setPassword(password);
                 userDAO.createUser(user);
                 break;
-
             case ("blockUser"):
-
+                String username = request.getParameter("username");
+                userDAO.blockUser(username);
                 break;
-
-
         }
         return "jsp/MainMenu.jsp";
     }

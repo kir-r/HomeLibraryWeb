@@ -1,29 +1,6 @@
-#sidebar {
-    width: 150px;
-    left: 100px;
-    top: 82px; /* Расстояние от верхнего края */
-    bottom: 0; /* Расстояние снизу  */
-}
-.form-select {
-    width: 30%;
-}
-.flex-container {
-    display: flex;
-}
-.nav {
-    flex-direction: column;
-}
-.nav-pills {
-    height: 480px;
-    justify-content: space-between;
-    padding-top: 40px;
-}
 form {
     display: none;
 }
 .form-control {
-    border-color: gray;
-}
-.result-box {
-    margin-top: 15%;
+    border-color: grey;
 }

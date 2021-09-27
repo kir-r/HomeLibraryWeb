@@ -149,7 +149,6 @@ public class LibraryDataBaseDAO implements LibraryDAO {
 
     public List<Book> searchBookWithBookmarks(User user) {
         List<Book> listOfBooksWithBookmarks = new ArrayList<>();
-
         try (Session session = dBConnector.sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Bookmark> criteriaQuery = cb.createQuery(Bookmark.class);
@@ -159,6 +158,7 @@ public class LibraryDataBaseDAO implements LibraryDAO {
 
             Query<Bookmark> query = session.createQuery(criteriaQuery);
             List<Bookmark> bookmarksWithBooks = query.getResultList();
+            System.out.println("bookmarksWithBooks " + bookmarksWithBooks); //!
             for (Bookmark bookmark : bookmarksWithBooks) {
                 listOfBooksWithBookmarks.add(bookmark.getBook());
             }

@@ -50,13 +50,13 @@ public class AuthorizationServlet extends HttpServlet {
     }
 
     private String login(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("hello from login method");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        User user = userDAO.authenticate(login, password);
+        user = userDAO.authenticate(login, password);
 
         if (user != null) {
             request.getSession().setAttribute("login", user.getLogin());
+            System.out.println("Hello, " + user.getName());
 
             if (user.isAdmin()) {
                 request.getSession().setAttribute("role", "ADMIN");
