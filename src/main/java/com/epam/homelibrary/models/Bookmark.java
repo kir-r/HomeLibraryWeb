@@ -45,6 +45,6 @@ public class Bookmark {
 
     @Override
     public String toString() {
-        return "Bookmark in book " + book.getName() + " on page " + page + " from " + AuthorizationServlet.getUser().getName();
+        return "Bookmark in book " + book.getName() + " on page " + page;
     }
 }

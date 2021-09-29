@@ -8,6 +8,7 @@ import com.epam.homelibrary.models.Admin;
 import com.epam.homelibrary.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ public class AuthorizationServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(AuthorizationServlet.class);
     private final UserDAO userDAO = new UserDataBaseDAO();
     private static User user;
+    private final Cookies cookies = new Cookies();
 
     public static User getUser() {
         return user;
@@ -55,27 +57,23 @@ public class AuthorizationServlet extends HttpServlet {
         user = userDAO.authenticate(login, password);
 
         if (user != null) {
+            cookies.addTokenToCookies(response, login);
             request.getSession().setAttribute("login", user.getLogin());
             System.out.println("Hello, " + user.getName());
 
-            if (user.isAdmin()) {
-                request.getSession().setAttribute("role", "ADMIN");
-            } else {
-                request.getSession().setAttribute("role", "USER");
-            }
+            request.getSession().setAttribute("role", user.isAdmin() ? "ADMIN" : "USER");
 
-            //Когда вы используете request.getSession().setAttribute() , вы сохраняете что-то для этого
+            // Когда вы используете request.getSession().setAttribute() , вы сохраняете что-то для этого
             // конкретного сеанса пользователя . Вы можете использовать этот атрибут в любое время,
             // если срок действия сеанса пользователя еще не истек .
             return "jsp/MainMenu.jsp";
         }
-        else {
-            return "jsp/LoginPage.jsp";
-        }
+        return "jsp/LoginPage.jsp";
     }
 
     private String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
+        cookies.deleteCookies(request, response);
         return "/index.jsp";
     }
 }

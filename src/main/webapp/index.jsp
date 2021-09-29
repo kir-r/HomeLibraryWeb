@@ -1,10 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <html>
-  <head>
+<head>
     <name>Index</name>
-  </head>
-  <body>
-    <jsp:forward page="/jsp/LoginPage.jsp"/>
-    </body>
+</head>
+<body>
+<jsp:forward page="/jsp/LoginPage.jsp"/>
+</body>
 </html>
-

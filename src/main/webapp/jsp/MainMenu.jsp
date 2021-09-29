@@ -298,5 +298,4 @@
         crossorigin="anonymous"></script>
 <script src="src/form-visibility.js"></script>
 </body>
-
 </html>

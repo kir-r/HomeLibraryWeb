@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet("/controller")
 public class LibraryWorkServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(LibraryWorkServlet.class);
+    private final Cookies cookies = new Cookies();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,10 +28,12 @@ public class LibraryWorkServlet extends HttpServlet {
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ActionResolver actionResolver = new ActionResolver();
-        String result = actionResolver.execute(request);
-        request.getRequestDispatcher(result).forward(request, response);
+        if (cookies.verifyToken(request)) {
+            ActionResolver actionResolver = new ActionResolver();
+            String result = actionResolver.execute(request);
+            request.getRequestDispatcher(result).forward(request, response);
+        } else {
+            request.getRequestDispatcher("jsp/LoginPage.jsp").forward(request, response);
+        }
     }
 }
-
-

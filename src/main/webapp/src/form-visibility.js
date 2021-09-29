@@ -43,4 +43,3 @@ $('select').on('change', function() {
             break;
     }
 });
-

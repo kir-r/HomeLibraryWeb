@@ -109,7 +109,6 @@
         <flyway.user>sa</flyway.user>
         <flyway.password>pwd</flyway.password>
         <flyway.url>jdbc:h2:~/test</flyway.url>
-        <tomcat7-version>7.0.93</tomcat7-version>
 
     </properties>
     <build>
@@ -143,5 +142,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
