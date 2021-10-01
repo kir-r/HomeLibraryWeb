@@ -1,4 +1,4 @@
-package com.epam.homelibrary.Controller.Servlets;
+package com.epam.homelibrary.Controller.TokenManager;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

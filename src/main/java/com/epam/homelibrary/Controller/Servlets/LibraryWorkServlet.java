@@ -1,7 +1,7 @@
 package com.epam.homelibrary.Controller.Servlets;
 
-import com.epam.homelibrary.DAO.LibraryDAO;
-import com.epam.homelibrary.DAO.impl.LibraryDataBaseDAO;
+import com.epam.homelibrary.Controller.ActionManager.ActionResolver;
+import com.epam.homelibrary.Controller.TokenManager.CookieManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,8 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/controller")
 public class LibraryWorkServlet extends HttpServlet {
-    public static final Logger logger = LogManager.getLogger(LibraryWorkServlet.class);
-    private final Cookies cookies = new Cookies();
+    private final CookieManager cookieManager = new CookieManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,7 +27,7 @@ public class LibraryWorkServlet extends HttpServlet {
     }
 
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (cookies.verifyToken(request)) {
+        if (cookieManager.verifyToken(request)) {
             ActionResolver actionResolver = new ActionResolver();
             String result = actionResolver.execute(request);
             request.getRequestDispatcher(result).forward(request, response);

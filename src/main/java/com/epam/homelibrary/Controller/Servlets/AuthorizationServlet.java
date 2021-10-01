@@ -1,14 +1,11 @@
 package com.epam.homelibrary.Controller.Servlets;
 
+import com.epam.homelibrary.Controller.TokenManager.CookieManager;
 import com.epam.homelibrary.DAO.UserDAO;
 import com.epam.homelibrary.DAO.impl.UserDataBaseDAO;
-import com.epam.homelibrary.DAO.impl.UserJsonDAO;
-import com.epam.homelibrary.Main;
-import com.epam.homelibrary.models.Admin;
 import com.epam.homelibrary.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +19,7 @@ public class AuthorizationServlet extends HttpServlet {
     public static final Logger logger = LogManager.getLogger(AuthorizationServlet.class);
     private final UserDAO userDAO = new UserDataBaseDAO();
     private static User user;
-    private final Cookies cookies = new Cookies();
+    private final CookieManager cookieManager = new CookieManager();
 
     public static User getUser() {
         return user;
@@ -57,7 +54,7 @@ public class AuthorizationServlet extends HttpServlet {
         user = userDAO.authenticate(login, password);
 
         if (user != null) {
-            cookies.addTokenToCookies(response, login);
+            cookieManager.addTokenToCookies(response, login);
             request.getSession().setAttribute("login", user.getLogin());
             System.out.println("Hello, " + user.getName());
 
@@ -73,7 +70,7 @@ public class AuthorizationServlet extends HttpServlet {
 
     private String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();
-        cookies.deleteCookies(request, response);
+        cookieManager.deleteCookies(request, response);
         return "/index.jsp";
     }
 }

@@ -179,7 +179,7 @@ public class LibraryDataBaseDAO implements LibraryDAO {
         }
     }
 
-    public List<Bookmark> getListOfBookMarksFromDB() {
+    public List<Bookmark> getListOfBookmarksFromDB() {
         List<Bookmark> list;
         try (Session session = dBConnector.sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();

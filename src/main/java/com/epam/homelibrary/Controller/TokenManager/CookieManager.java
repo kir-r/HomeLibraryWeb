@@ -1,10 +1,10 @@
-package com.epam.homelibrary.Controller.Servlets;
+package com.epam.homelibrary.Controller.TokenManager;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class Cookies {
+public class CookieManager {
     private final TokenManager tokenManager = new TokenManager();
 
     public void addTokenToCookies(HttpServletResponse response, String login) {
