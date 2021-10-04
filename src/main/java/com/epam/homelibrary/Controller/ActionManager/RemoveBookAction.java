@@ -8,10 +8,9 @@ public class RemoveBookAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String nameOfBook = request.getParameter("name");
         libraryDAO.removeBook(nameOfBook);
         request.setAttribute("removedBook", nameOfBook);
-        return "jsp/MainMenu.jsp";
     }
 }

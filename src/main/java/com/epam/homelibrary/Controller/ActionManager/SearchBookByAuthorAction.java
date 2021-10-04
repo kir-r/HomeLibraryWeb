@@ -11,7 +11,7 @@ public class SearchBookByAuthorAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String author = request.getParameter("author");
         List<Book> listOfBooksFromDB = libraryDAO.searchBookByAuthor(author);
         StringBuilder stringBuilder = new StringBuilder();
@@ -23,6 +23,5 @@ public class SearchBookByAuthorAction implements Action {
         } else {
             request.setAttribute("bookFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

@@ -20,7 +20,6 @@ public class CookieManager {
         return false;
     }
 
-
     private Cookie getCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {

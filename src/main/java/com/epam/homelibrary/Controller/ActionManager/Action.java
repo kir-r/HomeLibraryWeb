@@ -8,9 +8,5 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface Action {
-    String execute(HttpServletRequest request);
-
-//    addBookAction, removeBookAction, removeBookByAuthorAction, addBookmarkAction, removeBookmarkAction, searchBookByNameAction, searchBookByAuthorAction,
-//    searchBookByISBNAction, searchBookInRangeOfYearsAction, searchBookByYearPagesNameAction, searchBookWithBookmarksAction, getListOfBooksFromDBAction,
-//    getListOfBookMarksFromDBAction, getListOfUserFromDBAction
+    void execute(HttpServletRequest request);
 }

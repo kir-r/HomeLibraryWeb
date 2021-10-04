@@ -11,7 +11,7 @@ public class GetListOfBookmarksFromDBAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         List<Bookmark> listOfBookmarksFromDB = libraryDAO.getListOfBookmarksFromDB();
         StringBuilder stringBuilder = new StringBuilder();
         if (!listOfBookmarksFromDB.isEmpty()) {
@@ -22,6 +22,5 @@ public class GetListOfBookmarksFromDBAction implements Action {
         } else {
             request.setAttribute("bookmarkFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

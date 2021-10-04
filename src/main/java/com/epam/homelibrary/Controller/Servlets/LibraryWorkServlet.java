@@ -13,7 +13,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 @WebServlet("/controller")
-public class LibraryWorkServlet extends HttpServlet {
+public class
+LibraryWorkServlet extends HttpServlet {
     private final CookieManager cookieManager = new CookieManager();
 
     @Override

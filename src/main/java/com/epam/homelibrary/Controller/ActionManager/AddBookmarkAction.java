@@ -12,7 +12,7 @@ public class AddBookmarkAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String nameOfBook = request.getParameter("name");
         int pages = Integer.parseInt(request.getParameter("pages"));
         List<Book> listOfBooksFromDB = libraryDAO.searchBookByName(nameOfBook);
@@ -21,6 +21,5 @@ public class AddBookmarkAction implements Action {
         bookmark.setBook(listOfBooksFromDB.get(0));
         libraryDAO.addBookmark(bookmark);
         request.setAttribute("addedBookmark", bookmark);
-        return "jsp/MainMenu.jsp";
     }
 }

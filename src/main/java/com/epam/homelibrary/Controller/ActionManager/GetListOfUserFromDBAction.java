@@ -11,7 +11,7 @@ public class GetListOfUserFromDBAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         List<User> listOfUserFromDB = libraryDAO.getListOfUserFromDB();
         StringBuilder stringBuilder = new StringBuilder();
         if (!listOfUserFromDB.isEmpty()) {
@@ -22,6 +22,5 @@ public class GetListOfUserFromDBAction implements Action {
         } else {
             request.setAttribute("userFromList", "нету никого");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

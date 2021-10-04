@@ -12,7 +12,7 @@ public class SearchBookByISBNAction implements Action {
     List<Book> listOfBooksFromDB;
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         long ISBN = Long.parseLong(request.getParameter("ISBN"));
         listOfBooksFromDB = libraryDAO.searchBookByISBN(ISBN);
         if (!listOfBooksFromDB.isEmpty()) {
@@ -22,6 +22,5 @@ public class SearchBookByISBNAction implements Action {
         } else {
             request.setAttribute("bookFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

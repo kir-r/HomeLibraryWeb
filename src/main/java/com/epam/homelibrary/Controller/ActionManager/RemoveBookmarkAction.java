@@ -11,7 +11,7 @@ public class RemoveBookmarkAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String nameOfBook = request.getParameter("name");
         List<Book> listOfBooksFromDB = libraryDAO.searchBookByName(nameOfBook);
         if (!listOfBooksFromDB.isEmpty()) {
@@ -20,6 +20,5 @@ public class RemoveBookmarkAction implements Action {
         } else {
             request.setAttribute("removedBookmark", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

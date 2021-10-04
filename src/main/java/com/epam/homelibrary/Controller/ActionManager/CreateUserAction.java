@@ -5,11 +5,11 @@ import com.epam.homelibrary.DAO.impl.UserDataBaseDAO;
 import com.epam.homelibrary.models.User;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class CreateUserAction implements Action{
+public class CreateUserAction implements Action {
     private final UserDAO userDAO = new UserDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String login = request.getParameter("login");
         System.out.println("createUser login: " + login);
         String password = request.getParameter("password");
@@ -19,6 +19,5 @@ public class CreateUserAction implements Action{
         user.setLogin(login);
         user.setPassword(password);
         userDAO.createUser(user);
-        return "jsp/MainMenu.jsp";
     }
 }

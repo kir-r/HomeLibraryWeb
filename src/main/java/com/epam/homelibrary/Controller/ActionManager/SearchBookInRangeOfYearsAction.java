@@ -11,7 +11,7 @@ public class SearchBookInRangeOfYearsAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         int yearFrom = Integer.parseInt(request.getParameter("yearFrom"));
         int yearTo = Integer.parseInt(request.getParameter("yearTo"));
         StringBuilder stringBuilder = new StringBuilder();
@@ -26,6 +26,5 @@ public class SearchBookInRangeOfYearsAction implements Action {
                 request.setAttribute("bookFromList", "нет такой");
             }
         }
-        return "jsp/MainMenu.jsp";
     }
 }

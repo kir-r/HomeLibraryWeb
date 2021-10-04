@@ -11,7 +11,7 @@ public class SearchBookByYearPagesNameAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String nameOfBook = request.getParameter("name");
         int year = Integer.parseInt(request.getParameter("year"));
         int pages = Integer.parseInt(request.getParameter("pages"));
@@ -23,6 +23,5 @@ public class SearchBookByYearPagesNameAction implements Action {
         } else {
             request.setAttribute("bookFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

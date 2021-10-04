@@ -12,7 +12,7 @@ public class GetListOfBooksFromDBAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         List<Book> listOfBooksFromDB = libraryDAO.getListOfBooksFromDB();
         StringBuilder stringBuilder = new StringBuilder();
         if (!listOfBooksFromDB.isEmpty()) {
@@ -23,6 +23,5 @@ public class GetListOfBooksFromDBAction implements Action {
         } else {
             request.setAttribute("bookFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

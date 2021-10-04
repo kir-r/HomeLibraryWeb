@@ -12,7 +12,7 @@ public class SearchBookWithBookmarksAction implements Action {
     private final LibraryDAO libraryDAO = new LibraryDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         List<Book> listOfBookWithBookmarks = libraryDAO.searchBookWithBookmarks(AuthorizationServlet.getUser());
         StringBuilder stringBuilder = new StringBuilder();
         if (!listOfBookWithBookmarks.isEmpty()) {
@@ -23,6 +23,5 @@ public class SearchBookWithBookmarksAction implements Action {
         } else {
             request.setAttribute("bookFromList", "нет такой");
         }
-        return "jsp/MainMenu.jsp";
     }
 }

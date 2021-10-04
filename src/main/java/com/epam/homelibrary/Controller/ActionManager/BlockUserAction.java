@@ -8,9 +8,8 @@ public class BlockUserAction implements Action {
     private final UserDAO userDAO = new UserDataBaseDAO();
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public void execute(HttpServletRequest request) {
         String username = request.getParameter("username");
         userDAO.blockUser(username);
-        return "jsp/MainMenu.jsp";
     }
 }
