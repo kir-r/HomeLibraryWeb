@@ -1,0 +1,13 @@
+body {
+    background-color:rgb(250, 255, 153);
+}
+.logo {
+    width: 100%;
+    padding-left: 10%;
+}
+.container-xxl {
+    margin-top: 20%;
+}
+p {
+    color: blue;
+}

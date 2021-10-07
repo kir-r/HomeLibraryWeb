@@ -385,7 +385,7 @@ public class LibraryAPI {
     }
 
     private void printBookmarks() {
-        List<Bookmark> listOfBookmarksFromDB = libraryDAO.getListOfBookMarksFromDB();
+        List<Bookmark> listOfBookmarksFromDB = libraryDAO.getListOfBookmarksFromDB();
         if (!listOfBookmarksFromDB.isEmpty()) {
             for (Bookmark bm : listOfBookmarksFromDB) {
                 System.out.println(bm);
@@ -405,5 +405,4 @@ public class LibraryAPI {
             Main.logger.info("Database is empty");
         }
     }
-
 }

@@ -1,0 +1,6 @@
+form {
+    display: none;
+}
+.form-control {
+    border-color: grey;
+}

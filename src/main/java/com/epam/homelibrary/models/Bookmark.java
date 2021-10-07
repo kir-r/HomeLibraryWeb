@@ -1,5 +1,7 @@
 package com.epam.homelibrary.models;
 
+import com.epam.homelibrary.Controller.Servlets.AuthorizationServlet;
+
 import javax.persistence.*;
 
 @Entity
@@ -43,6 +45,6 @@ public class Bookmark {
 
     @Override
     public String toString() {
-        return "Bookmark in book " + book.getName() + " on page " + page + " from " + getVisitor();
+        return "Bookmark in book " + book.getName() + " on page " + page;
     }
 }

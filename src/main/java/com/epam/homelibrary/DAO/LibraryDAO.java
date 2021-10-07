@@ -32,7 +32,7 @@ public interface LibraryDAO {
 
     List<Book> getListOfBooksFromDB();
 
-    List<Bookmark> getListOfBookMarksFromDB();
+    List<Bookmark> getListOfBookmarksFromDB();
 
     List<User> getListOfUserFromDB();
 
